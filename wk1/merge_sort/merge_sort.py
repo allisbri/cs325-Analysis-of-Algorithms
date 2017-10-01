@@ -30,10 +30,11 @@ def merge(left, right):
             s_array.append(right[j])
             j = j + 1
 
+    # source: below if/else blocks created with help from https://www.youtube.com/watch?v=3aTfQvs-_hA&t=255s
     if len(left) <= i:
-        s_array.append(right[j:])
+        s_array.extend(right[j:])
     else:
-        s_array.append(left[i:])
+        s_array.extend(left[i:])
     return s_array
 
 '''
