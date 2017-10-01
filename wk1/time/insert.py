@@ -2,6 +2,8 @@
 # Date: 9/30/2017
 # Course: CS325 Online
 # Description: Assignment 1, insertion_sort
+import random
+import time
 
 
 def insertion_sort(array):
@@ -15,23 +17,35 @@ def insertion_sort(array):
     return array
 
 
-def file_sort():
-    file_in = open('data.txt', 'r')
-    file_out = open('insert.out', 'w')
-    for line in file_in:
-        array_string = line.split()
-        array_string = array_string[1:]
-        # reference for below line to convert array of strings to ints:
-        # https://stackoverflow.com/questions/5306079/python-how-do-i-convert-an-array-of-strings-to-an-array-of-numbers
-        array_int = [int(numeric_string) for numeric_string in array_string]
-        sorted_array = insertion_sort(array_int)
-        for s in sorted_array:
-            file_out.write(str(s))
-            file_out.write(' ')
-        file_out.write('\n')
-    file_in.close()
-    file_out.close()
+tot = 0
+ave = 0
+rand_array = []
+# running time code was written based on canvas lecture for hw1 problem 5
+file_out = open('insert_time.txt', 'w')
+for k in range(0, 11000, 1000):
+    file_out.write(str(k) + ' , ')
+    print(k, end=' , ')
+    tot = 0
+    ave = 0
 
+    for l in range(3):
+        rand_array = []
+        for m in range(k):
+            random_number = random.randint(0, 1000)
+            rand_array.append(random_number)
 
-file_sort()
+        start_time = time.time()
+        insertion_sort(rand_array)
+        end_time = time.time()
+
+        elapsed_time = end_time - start_time
+        tot = tot + elapsed_time
+        file_out.write(str(elapsed_time) + ' , ')
+        print(elapsed_time, end=' , ')
+
+    ave = tot/3
+    print("average: " + str(ave))
+    file_out.write("average: " + str(ave) + '\n')
+
+file_out.close()
 

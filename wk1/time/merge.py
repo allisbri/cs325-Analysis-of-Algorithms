@@ -4,6 +4,7 @@
 # Description: Assignment 1, merge_sort
 
 import time
+import random
 
 
 def merge_sort(array):
@@ -38,9 +39,43 @@ def merge(left, right):
     return s_array
 
 
-def file_sort():
+tot = 0
+ave = 0
+rand_array = []
+# running time code was written based on canvas lecture for hw1 problem 5
+file_out = open('merge_time.txt', 'w')
+for k in range(0, 110000, 10000):
+    file_out.write(str(k) + ' , ')
+    print(k, end=' , ')
+    tot = 0
+    ave = 0
+
+    for l in range(3):
+        rand_array = []
+        for m in range(k):
+            random_number = random.randint(0, 1000)
+            rand_array.append(random_number)
+
+        start_time = time.time()
+        merge_sort(rand_array)
+        end_time = time.time()
+
+        elapsed_time = end_time - start_time
+        tot = tot + elapsed_time
+        file_out.write(str(elapsed_time) + ' , ')
+        print(elapsed_time, end=' , ')
+
+    ave = tot/3
+    print("average: " + str(ave))
+    file_out.write("average: " + str(ave) + '\n')
+
+file_out.close()
+
+
+
+'''
     file_in = open('data.txt', 'r')
-    file_out = open('merge.out', 'w')
+    
     for line in file_in:
         array_string = line.split()
         # drop first item(size) in array
@@ -48,7 +83,9 @@ def file_sort():
         # reference for below line to convert array of strings to ints:
         # https://stackoverflow.com/questions/5306079/python-how-do-i-convert-an-array-of-strings-to-an-array-of-numbers
         array_int = [int(numeric_string) for numeric_string in array_string]
+
         sorted_array = merge_sort(array_int)
+
         for s in sorted_array:
             file_out.write(str(s))
             file_out.write(' ')
@@ -58,6 +95,7 @@ def file_sort():
 
 
 file_sort()
+'''
 
 '''
 recurrsive merge 
