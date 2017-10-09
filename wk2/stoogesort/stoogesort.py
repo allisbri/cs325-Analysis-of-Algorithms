@@ -1,23 +1,33 @@
 # Name: Brian Allison
 # Date: 10/8/2017
 # Course: CS325 Online
-# Description: Assignment 1, insertion_sort
+# Description: Assignment 2, stooge_sort
 
 
-# sorts an array of ints in O(n^2) time
+# sorts an array of ints in O(n^2.7) time
 # below code was written with the hw2 pseudo code used as a reference
 def stooge_sort(array):
     n = len(array)
-    if n == 2 and array[0] > array[1]:
-        array[0], array[1] = array[1], array[0]
+    if n == 2:
+        if array[0] > array[1]:
+            array[0], array[1] = array[1], array[0]
+        return array
     elif n > 2:
-        r = 2 * n % 3
+        r = (2 * n) % 3
         print(r)
-        m = 2 * n // 3 + r + r % 3
-        print(m)
-        stooge_sort(array[:int(m)])
-        stooge_sort(array[int(n - m):int(n)])
-        stooge_sort(array[:int(m)])
+        if r != 0:
+            m = 2 * n // 3 + 1
+            print(m)
+        else:
+            m = 2 * n // 3
+            print(m)
+        # m = 2 * n // 3 + r + r % 3
+        fthird = stooge_sort(array[:int(m)])
+        array = fthird + array[int(m):]
+        lthird = stooge_sort(array[int(n - m):int(n)])
+        array = array[:int(n - m)] + lthird
+        fthird = stooge_sort(array[:int(m)])
+        array = fthird + array[int(m):]
 
     return array
 
