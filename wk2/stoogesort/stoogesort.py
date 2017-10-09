@@ -12,14 +12,12 @@ def stooge_sort(array):
         array[0], array[1] = array[1], array[0]
     elif n > 2:
         r = 2 * n % 3
-        if r != 0:
-            m = 2 * n / 3 + 3
-        else:
-            m = 2 * n / 3
-        # m = 2 * n / 3 + r + r % 3
-        stooge_sort(array[:m])
-        stooge_sort(array[n - m:n])
-        stooge_sort(array[:m])
+        print(r)
+        m = 2 * n // 3 + r + r % 3
+        print(m)
+        stooge_sort(array[:int(m)])
+        stooge_sort(array[int(n - m):int(n)])
+        stooge_sort(array[:int(m)])
 
     return array
 
