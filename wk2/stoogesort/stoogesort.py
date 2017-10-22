@@ -14,14 +14,10 @@ def stooge_sort(array):
         return array
     elif n > 2:
         r = (2 * n) % 3
-        print(r)
         if r != 0:
             m = 2 * n // 3 + 1
-            print(m)
         else:
             m = 2 * n // 3
-            print(m)
-        # m = 2 * n // 3 + r + r % 3
         fthird = stooge_sort(array[:int(m)])
         array = fthird + array[int(m):]
         lthird = stooge_sort(array[int(n - m):int(n)])
